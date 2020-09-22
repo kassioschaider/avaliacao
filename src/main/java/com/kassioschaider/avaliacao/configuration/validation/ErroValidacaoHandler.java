@@ -1,4 +1,4 @@
-package com.kassioschaider.avaliacao.configuration;
+package com.kassioschaider.avaliacao.configuration.validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -48,6 +48,8 @@ public class ErroValidacaoHandler {
         switch (field) {
             case "nome":
                 return "Nome";
+            case "idMarca":
+                return "Marca";
             default:
                 return field;
         }

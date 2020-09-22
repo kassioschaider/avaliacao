@@ -1,4 +1,4 @@
-package com.kassioschaider.avaliacao.configuration;
+package com.kassioschaider.avaliacao.configuration.validation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

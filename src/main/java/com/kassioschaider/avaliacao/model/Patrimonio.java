@@ -1,6 +1,5 @@
 package com.kassioschaider.avaliacao.model;
 
-import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
