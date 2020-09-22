@@ -1,13 +1,16 @@
 package com.kassioschaider.avaliacao.controller;
 
+import com.kassioschaider.avaliacao.model.Marca;
 import com.kassioschaider.avaliacao.service.MarcaService;
 import com.kassioschaider.avaliacao.service.dto.MarcaDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,5 +24,14 @@ public class MarcaController {
     @GetMapping("/marcas")
     public List<MarcaDTO> obterTodos() {
         return marcaService.obterTodos();
+    }
+
+    @PostMapping("/marcas")
+    @Transactional
+    public ResponseEntity<MarcaDTO> cadastrar(@RequestBody @Valid MarcaDTO marcaDTO, UriComponentsBuilder uriBuilder) {
+        MarcaDTO result = marcaService.cadastrar(marcaDTO);
+        return ResponseEntity.created(uriBuilder.path("/marcas/{id}")
+                .buildAndExpand(result.getId()).toUri())
+                .body(result);
     }
 }

@@ -1,5 +1,6 @@
 package com.kassioschaider.avaliacao.service.impl;
 
+import com.kassioschaider.avaliacao.model.Marca;
 import com.kassioschaider.avaliacao.repository.MarcaRepository;
 import com.kassioschaider.avaliacao.service.MarcaService;
 import com.kassioschaider.avaliacao.service.dto.MarcaDTO;
@@ -28,21 +29,23 @@ public class MarcaServiceImpl implements MarcaService {
 
     @Override
     public MarcaDTO cadastrar(MarcaDTO marcaDTO) {
-        return null;
+        Marca marca = marcaMapper.toEntity(marcaDTO);
+        return marcaMapper.toDto(marcaRepository.save(marca));
     }
 
     @Override
     public MarcaDTO atualizar(MarcaDTO marcaDTO) {
-        return null;
+        Marca marca = marcaMapper.toEntity(marcaDTO);
+        return marcaMapper.toDto(marcaRepository.save(marca));
     }
 
     @Override
     public Optional<MarcaDTO> obterPorId(Long id) {
-        return Optional.empty();
+        return marcaRepository.findById(id).map(marcaMapper::toDto);
     }
 
     @Override
     public void excluirPorId(Long id) {
-
+        marcaRepository.deleteById(id);
     }
 }
