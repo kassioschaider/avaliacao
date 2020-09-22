@@ -17,10 +17,10 @@ import java.util.Optional;
 public class MarcaServiceImpl implements MarcaService {
 
     @Autowired
-    private MarcaRepository marcaRepository;
+    private final MarcaRepository marcaRepository;
 
     @Autowired
-    private MarcaMapper marcaMapper;
+    private final MarcaMapper marcaMapper;
 
     @Override
     public List<MarcaDTO> obterTodos() {

@@ -1,8 +1,11 @@
 package com.kassioschaider.avaliacao.model;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -17,6 +20,9 @@ public class Patrimonio {
     @ManyToOne
     private Marca marca;
     private String descricao;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long numeroDoTombo;
+    private Long numeroDoTombo = geradorNumeroTombo();
+
+    private Long geradorNumeroTombo() {
+        return Timestamp.valueOf(LocalDateTime.now()).getTime();
+    }
 }

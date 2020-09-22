@@ -38,7 +38,7 @@ public class ErroValidacaoHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ErroFormularioDTO handle(DataIntegrityViolationException exception) {
         System.out.println(exception.getMostSpecificCause().getLocalizedMessage());
-        ErroFormularioDTO erro = new ErroFormularioDTO("Erro de campo único",
+        ErroFormularioDTO erro = new ErroFormularioDTO("Violação de chave estrangeira",
                 exception.getMostSpecificCause()
                 .getMessage());
         return erro;
