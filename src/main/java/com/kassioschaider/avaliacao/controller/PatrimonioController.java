@@ -3,7 +3,6 @@ package com.kassioschaider.avaliacao.controller;
 import com.kassioschaider.avaliacao.service.PatrimonioService;
 import com.kassioschaider.avaliacao.service.dto.PatrimonioDTO;
 import com.kassioschaider.avaliacao.service.dto.PatrimonioFormDTO;
-import com.kassioschaider.avaliacao.service.mapper.PatrimonioMapper;
 import com.kassioschaider.avaliacao.util.ResponseUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +18,6 @@ import java.util.List;
 @RequestMapping("/api")
 @AllArgsConstructor
 public class PatrimonioController {
-
-    @Autowired
-    private final PatrimonioMapper patrimonioMapper;
 
     @Autowired
     private final PatrimonioService patrimonioService;
