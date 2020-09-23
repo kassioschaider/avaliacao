@@ -40,7 +40,10 @@ Opção 2 (caso você já tenha o Postegre instalado na máquina):
  
 ### Endpoints de dados da API
  
-- A API REST possui os seguintes endpoints e todos recebem e devolvem dados no formato JSON:
+- A API REST possui os seguintes endpoints e todos recebem e devolvem dados no formato JSON, sendo que é utilizado um 
+ResponseEntity e ResponseUtil (implementado) para gerar as respostas dos endpoints, além disso todas as requisições passam
+pelo Handler de validação, gerando uma resposta amigável ao front-end no formato "campo" e "erros" (ErroFormularioDTO):
+
  - `GET /api/marcas`: obtém todas as Marcas cadastradas.
  - `GET /api/marcas/:id`: obtém a Marca referente ao id.
  - `GET /api/patrimonios`: obtém todas os Patrimonios cadastrados.
@@ -60,3 +63,31 @@ Opção 2 (caso você já tenha o Postegre instalado na máquina):
  - `DELETE /api/marcas/:id`: O endpoint processa uma requisição de exclusão de uma Marca a partir do id,
     sendo que não é possível excluir uma Marca com algum Patrimonio relacionado com ela.
  - `DELETE /api/patrimonios/:id`:  O endpoint processa uma requisição de exclusão de um Patrimonio a partir do id.
+
+### Endpoint de Autenticação da API
+
+ - `POST /auth`: O endpoint de autenticação de usuário. Deve conter no corpo da requisição os campos "email" e "senha" do usuário.
+ Ao fazer login com sucesso, o usuário recebe um token de autenticação que permanece ativo por 1 dia (valor que pode ser alterado 
+ no application.properties em "avaliacao.jwt.expiration").
+ 
+### Endpoint do Exercício 1
+
+ - `POST /exercicio/:numero`: O endopoint processa uma requisição e devolve como inteiro o maior "número irmão" do numero passado
+ como parãmetro. Caso o resultado exceda 100.000.000, o endpoint retorna -1.
+
+### Arquitetura
+
+O projeto a seguinte estrutura:
+
+ - Packs:
+   - configuration: filtro de validação de dados e implementações de segurança com WebToken. Contém os pacotes "security" e "validation".
+   - controller: todos os RestControllers da API.
+   - model: as classes de domínio da API, sendo que são utilizados as anotações do Lombok para gerar Getters, Setters, Contrucutors, Equals e HashCode.
+     Além disso também são os objetos persistidos no banco de dados, portanto também possuem anotações do Javax Persistence.
+   - repository: todos os repositórios da API, sendo que estes implementam os métodos da JpaRepository.
+   - service: todas as classes Services da API. Contém os pacotes:
+     - dto: para os os DTOs da API, incluindo os DTOs de Patrimonio (Form para cadastro), o DTO do Token para devolvem na requisição de acesso autenticado.
+     - impl: implementação dos métodos definidos nas interfaces Service.
+     - mapper: para as classes de mapeamento de conversão de DTO para Entity e Entity para DTO. Aqui é utilizado o EntityMapper para obter uma estrutura padrão
+       das interfaces mapper. É utilizado a biblioteca MapStruct para o mapeamento.
+   - util: pacotes com as classes e interfaces de suporte a API.
