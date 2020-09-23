@@ -37,8 +37,12 @@ Opção 2 (caso você já tenha o Postegre instalado na máquina):
  - Execute o script abaixo no banco de dados para ter um usuário com login "admin@admin.com" e senha "admin":
 
   INSERT INTO usuario(email, nome, senha) VALUES('admin@admin.com', 'admin', '$2a$10$Xoiyu2cEaD7.KaDHZwS1auotpZQXz4DMFH8dhBCXPsh4O9ej8CQV2');
+  
+ Observação: a porta da API foi alterada para 8000 (ver "server.port" no application.properties).
  
 ### Endpoints de dados da API
+
+- Endereço: http://localhost:8000
  
 - A API REST possui os seguintes endpoints e todos recebem e devolvem dados no formato JSON, sendo que é utilizado um 
 ResponseEntity e ResponseUtil (implementado) para gerar as respostas dos endpoints, além disso todas as requisições passam
@@ -68,7 +72,10 @@ pelo Handler de validação, gerando uma resposta amigável ao front-end no form
 
  - `POST /auth`: O endpoint de autenticação de usuário. Deve conter no corpo da requisição os campos "email" e "senha" do usuário.
  Ao fazer login com sucesso, o usuário recebe um token de autenticação que permanece ativo por 1 dia (valor que pode ser alterado 
- no application.properties em "avaliacao.jwt.expiration").
+ no application.properties em "avaliacao.jwt.expiration"). Quando uma requisição aos recurso da API é feita com o token e tipo definido como
+ Bearer, o sistema libera o acesso.
+ 
+ Observação: as senhas de usuário devem ser criptografadas com BCrypt e algoritmo HS256, a secret se encontra no application.properties.
  
 ### Endpoint do Exercício 1
 
