@@ -26,6 +26,7 @@ public class ExercicioController {
         int j = charArray.size()-1;
         for (Character character : charArray) resultado = resultado + (int) ((character - 48) * Math.pow(10, j--));
 
+        if (resultado > 100000000) return -1;
         return resultado;
     }
 }

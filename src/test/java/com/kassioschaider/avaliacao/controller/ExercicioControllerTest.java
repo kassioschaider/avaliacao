@@ -55,12 +55,22 @@ public class ExercicioControllerTest {
 
     @Test
     public void deveriaObterMenosUmPorNumeroGrande() throws Exception {
-        URI uri = new URI("/exercicio/123456789");
+        URI uri = new URI("/exercicio/000000011");
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(uri))
                 .andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
 
         assertEquals("-1", mvcResult.getResponse().getContentAsString());
+    }
+
+    @Test
+    public void deveriaObterONumeroMaximoPermitido() throws Exception {
+        URI uri = new URI("/exercicio/000000001");
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(uri))
+                .andExpect(MockMvcResultMatchers.status().is(200)).andReturn();
+
+        assertEquals("100000000", mvcResult.getResponse().getContentAsString());
     }
 
     @Test
