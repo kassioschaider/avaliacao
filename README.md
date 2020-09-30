@@ -19,8 +19,8 @@ Opção 1 (Docker):
  - Execute o comando "docker-compose up -d" na pasta do projeto para subir um contêiner do Postgre e o Adminer;
  - Execute o comando "docker inspect avaliacao_db_1" para inspecionar o contêiner;
  - Copie o IPAddress do contêiner (logo ao fim do arquivo Json que será exibido),
-    em geral, ele seŕá "172.18.0.3" ou "172.18.0.2", dependendo de como rede do contêiner est distribuída;
- - Substitua o "localhost" pelo IPAddress do ocntẽiner na url de conexão (spring.datasource.url) no arquivo appication.properties;
+    em geral, ele seŕá "172.18.0.3" ou "172.18.0.2", dependendo de como rede do contêiner está distribuída;
+ - Substitua o "localhost" pelo IPAddress do contêiner na url de conexão (spring.datasource.url) no arquivo appication.properties;
  - Importe todas as depências do projeto;
  - Ao subir o sistema as tabelas serão criadas;
  - Execute o script abaixo no banco de dados para ter um usuário com login "admin@admin.com" e senha "admin".
