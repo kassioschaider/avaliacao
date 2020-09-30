@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -14,17 +15,16 @@ public class ExercicioController {
     public int obterMaiorNumeroIrmao(@PathVariable String numero) {
         if ((numero.length() > 9) || (Integer.parseInt(numero) > 100000000)) return -1;
 
-        char[] charArray = numero.toCharArray();
-        Integer[] intArray = new Integer[charArray.length];
+        ArrayList<Character> charArray = new ArrayList<>();
+        for (char c : numero.toCharArray()) {
+            charArray.add(c);
+        }
 
-        for (int i=0; i < charArray.length; i++) intArray[i] = (int) charArray[i];
-        Arrays.sort(intArray, Collections.reverseOrder());
+        charArray.sort(Collections.reverseOrder());
 
         int resultado = 0;
-        int j = intArray.length-1;
-        for (Integer integer : intArray) resultado = resultado + (int) ((integer - 48) * Math.pow(10, j--));
-
-        if (resultado > 100000000) return -1;
+        int j = charArray.size()-1;
+        for (Character character : charArray) resultado = resultado + (int) ((character - 48) * Math.pow(10, j--));
 
         return resultado;
     }
